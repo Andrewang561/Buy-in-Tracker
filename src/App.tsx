@@ -1,26 +1,31 @@
 import { useState } from 'react'
 import './App.css'
+import PlayerForm from 'components/PlayerForm.tsx';
+
+export interface Player {
+  name: string;
+  buyIn: number;
+  finalValue: number;
+}
 
 function App() {
-  const [playerInfo, setPlayerInfo] = useState({name: "", buyIn: 0})
-  
-  const handleClick = () => {
-    setPlayerInfo({name: "Andrew", buyIn: 100});
-  }
+  const [players, setPlayers] = useState<Player[]>([]);
+
+  const totalBuyIn = players.reduce((sum, p) => sum + p.buyIn, 0);
+  const totalValue = players.reduce((sum, p) => sum + p.finalValue, 0);
+
+  const addPlayer = (player: Player) => {
+    setPlayers([...players, player]);
+  };
 
   return (
-    <>
-      <h1>Poker Buy In Tracker</h1>
-      <div className="card">
-        <button onClick={handleClick}>
-          Update Player Info
-        </button>
-        <p>
-          Player: {playerInfo.name} Buy In: ${playerInfo.buyIn}
-        </p>
-      </div>
-    </>
-  )
+    <div className="App">
+      <h1>Poker Tracker</h1>
+      <PlayerForm onAdd={addPlayer} />
+      <PlayerList players={players} />
+      <Totals totalBuyIn={totalBuyIn} totalValue={totalValue} />
+    </div>
+  );
 }
 
 export default App
