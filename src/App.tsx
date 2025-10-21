@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import PlayerForm from 'components/PlayerForm.tsx';
+import Players from './components/players'
 
 export interface Player {
   name: string;
@@ -9,21 +9,15 @@ export interface Player {
 }
 
 function App() {
-  const [players, setPlayers] = useState<Player[]>([]);
-
-  const totalBuyIn = players.reduce((sum, p) => sum + p.buyIn, 0);
-  const totalValue = players.reduce((sum, p) => sum + p.finalValue, 0);
-
-  const addPlayer = (player: Player) => {
-    setPlayers([...players, player]);
-  };
-
+  const temp: Player = {
+    name: "Andrew",
+    buyIn: 500,
+    finalValue: 1000
+  }
   return (
     <div className="App">
       <h1>Poker Tracker</h1>
-      <PlayerForm onAdd={addPlayer} />
-      <PlayerList players={players} />
-      <Totals totalBuyIn={totalBuyIn} totalValue={totalValue} />
+      <Players player1={temp} />
     </div>
   );
 }
