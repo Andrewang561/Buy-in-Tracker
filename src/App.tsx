@@ -12,7 +12,7 @@ function App() {
 
   const [playerValue, setPlayerValue] = useState<Player>({
     name: "Andrew",
-    buyIn: 500,
+    buyIn: 200,
     finalValue: 1000
   });
 
