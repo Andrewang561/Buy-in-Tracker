@@ -16,38 +16,48 @@ function App() {
     finalValue: 1000
   });
 
+  const [formValue, setFormValue] = useState<Player>(playerValue);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormValue({
+      ...formValue,
+      [name]:
+        name === "name"
+          ? value 
+          : value === "" 
+          ? 0
+          : Number(value), 
+    });
+  };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("Submitted player:", playerValue);
+    setPlayerValue(formValue);
   };
 
   return (
     <div className="App">
+      <h1>Poker Tracker</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Name:
-          <input type="text" value={playerValue.name} onChange={(event) => 
-            setPlayerValue({ ...playerValue, name: event.target.value })
-          }></input>
+          <input type="text" name="name" value={formValue.name} onChange={handleChange}></input>
         </label>
         <br />
         <label>
           Buy In:
-          <input type="number" value={playerValue.buyIn} onChange={(event) =>
-            setPlayerValue({ ...playerValue, buyIn: Number(event.target.value)})
-          }></input>
+          <input type="number" name="buyIn" value={formValue.buyIn} onChange={handleChange}></input>
         </label>
         <br />
         <label>
           Final Value:
-          <input type= "number" value={playerValue.finalValue} onChange={(event) =>
-            setPlayerValue({ ...playerValue, finalValue: Number(event.target.value)})
-          }></input>
+          <input type= "number" name="finalValue" value={formValue.finalValue} onChange={handleChange}></input>
         </label>
         <br />
         <button type="submit">Submit</button>
       </form>
-      <h1>Poker Tracker</h1>
       <Players player1={playerValue} />
     </div>
   );
