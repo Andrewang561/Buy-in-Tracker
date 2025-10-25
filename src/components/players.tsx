@@ -5,7 +5,11 @@ interface PlayersProps {
 }
 
 function Players({ player1 }: PlayersProps) {
-    return <h1>{player1.name}: Buy In: {player1.buyIn} Final Value: {player1.finalValue}</h1>
+    return <tr>
+        <td>{player1.name}</td>
+        <td>{player1.buyIn}</td>
+        <td>{player1.finalValue}</td>
+    </tr>
 }
 
 export default Players

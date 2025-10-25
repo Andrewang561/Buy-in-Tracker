@@ -58,7 +58,18 @@ function App() {
         <br />
         <button type="submit">Submit</button>
       </form>
-      <Players player1={playerValue} />
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Buy In</th>
+            <th>Final Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <Players player1={playerValue}></Players>
+        </tbody>
+      </table>
     </div>
   );
 }
