@@ -26,8 +26,6 @@ function App() {
       [name]:
         name === "name"
           ? value 
-          : value === "" 
-          ? 0
           : Number(value), 
     });
   };
