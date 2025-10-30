@@ -4,17 +4,14 @@ import Players from './components/players'
 
 export interface Player {
   name: string;
-  buyIn: number;
-  finalValue: number;
+  buyIn: number | "";
+  finalValue: number | "";
 }
 
 function App() {
+  const emptyPlayer: Player = {name: "", buyIn: "", finalValue: ""};
 
-  const [playerValue, setPlayerValue] = useState<Player>({
-    name: "Andrew",
-    buyIn: 200,
-    finalValue: 1000
-  });
+  const [playerValue, setPlayerValue] = useState<Player>(emptyPlayer);
 
   const [formValue, setFormValue] = useState<Player>(playerValue);
 
@@ -33,7 +30,7 @@ function App() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setPlayerValue(formValue);
-    setFormValue({name: "", buyIn: 0, finalValue: 0});
+    setFormValue(emptyPlayer);
   };
 
   return (
