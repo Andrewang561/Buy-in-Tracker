@@ -15,6 +15,8 @@ function App() {
 
   const [formValue, setFormValue] = useState<Player>(playerValue);
 
+  const [allPlayers, setAllPlayers] = useState<Player[]>([]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -31,6 +33,7 @@ function App() {
     event.preventDefault();
     setPlayerValue(formValue);
     setFormValue(emptyPlayer);
+    setAllPlayers([...allPlayers, formValue]);
   };
 
   return (
@@ -63,7 +66,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          <Players player1={playerValue}></Players>
+          <Players players={allPlayers}></Players>
         </tbody>
       </table>
     </div>
