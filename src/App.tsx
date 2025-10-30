@@ -33,6 +33,7 @@ function App() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setPlayerValue(formValue);
+    setFormValue({name: "", buyIn: 0, finalValue: 0});
   };
 
   return (
