@@ -17,6 +17,8 @@ function App() {
 
   const [allPlayers, setAllPlayers] = useState<Player[]>([]);
 
+  const [totalValues, setTotalValues] = useState<Number[]>([]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -35,6 +37,30 @@ function App() {
     setFormValue(emptyPlayer);
     setAllPlayers([...allPlayers, formValue]);
   };
+
+  const handleClick = (event: any) => {
+    event.preventDefault();
+    let totalBuyIn: number = 0;
+    let totalFinalValue: number = 0;
+    for (let i = 0; i < allPlayers.length; i++) {
+      const playerBuyIn: number = Number(allPlayers[i].buyIn);
+      const playerFinalValue: number = Number(allPlayers[i].finalValue);
+      totalBuyIn += playerBuyIn;
+      totalFinalValue += playerFinalValue;
+    }
+    return (
+      <table>
+        <tr>
+          <th>Total Buy In</th>
+          <th>Total Final Value</th>
+        </tr>
+        <tr>
+          <td>{totalBuyIn}</td>
+          <td>{totalFinalValue}</td>
+        </tr>
+      </table>
+    );
+  }
 
   return (
     <div className="App">
@@ -69,6 +95,7 @@ function App() {
           <Players players={allPlayers}></Players>
         </tbody>
       </table>
+      <button type="button" onClick={handleClick}>Calculate Total</button>
     </div>
   );
 }
